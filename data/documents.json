@@ -5,129 +5,56 @@
       "name": "Ліцензія HealthTech (МОЗ)",
       "agency": "Міністерство охорони здоров'я",
       "category": "regulatory",
+      "keywords": ["ліцензія", "лицензия", "license", "healthtech", "медичне", "медицинское", "medical", "устройство", "устройство", "device", "прилад", "МОЗ", "реєстрація", "регистрация", "registration"],
+      "commonQuestions": [
+        "Як отримати ліцензію для HealthTech?",
+        "Как получить лицензию для HealthTech?",
+        "How to get a HealthTech license?",
+        "Скільки часу займає лицензування?",
+        "Сколько времени занимает лицензирование?",
+        "How long does licensing take?"
+      ],
+      "shortDescription": "Процес отримання ліцензії від МОЗ для виробників та дистриб'юторів медичних пристроїв",
       "stages": [
-        {
-          "stage": 1,
-          "name": "Підготовка документів",
-          "duration": "5-7 днів",
-          "status": "completed"
-        },
-        {
-          "stage": 2,
-          "name": "Подача в МОЗ",
-          "duration": "1 день",
-          "status": "completed"
-        },
-        {
-          "stage": 3,
-          "name": "Технічна перевірка",
-          "duration": "5-7 днів",
-          "status": "current"
-        },
-        {
-          "stage": 4,
-          "name": "Прийняття рішення",
-          "duration": "7-10 днів",
-          "status": "pending"
-        },
-        {
-          "stage": 5,
-          "name": "Видача ліцензії",
-          "duration": "2-3 дні",
-          "status": "pending"
-        }
+        {"stage": 1, "name": "Підготовка документів", "duration": "5-7 днів", "status": "completed"},
+        {"stage": 2, "name": "Подача в МОЗ", "duration": "1 день", "status": "completed"},
+        {"stage": 3, "name": "Технічна перевірка", "duration": "5-7 днів", "status": "current"},
+        {"stage": 4, "name": "Прийняття рішення", "duration": "7-10 днів", "status": "pending"},
+        {"stage": 5, "name": "Видача ліцензії", "duration": "2-3 дні", "status": "pending"}
       ],
-      "totalDays": {
-        "min": 20,
-        "realistic": 30,
-        "max": 45
-      },
-      "responsible": {
-        "name": "Відділ реєстрації",
-        "position": "МОЗ",
-        "email": "licensing@moz.gov.ua",
-        "phone": "+380 (44) 205-00-00"
-      },
-      "risks": [
-        "Неповний пакет документів",
-        "Політична волокита (штучне замораживання документа)",
-        "Вимога додаткових документів",
-        "Конфлікт інтересів у комісії"
-      ],
-      "accelerators": [
-        "GR Provider: перевірка пакету документів",
-        "GR Provider: запит про статус через 7 днів",
-        "GR Provider: зустріч із інспектором (підготовка)",
-        "GR Provider: контакти в МОЗ та навігація"
-      ],
-      "links": {
-        "moz": "https://moz.gov.ua"
-      }
+      "totalDays": {"min": 20, "realistic": 30, "max": 45},
+      "responsible": {"name": "Відділ реєстрації", "position": "МОЗ", "email": "licensing@moz.gov.ua", "phone": "+380 (44) 205-00-00"},
+      "risks": ["Неповний пакет документів", "Політична волокита (штучне замораживання документа)", "Вимога додаткових документів", "Конфлікт інтересів у комісії"],
+      "accelerators": ["GR Provider: перевірка пакету документів", "GR Provider: запит про статус через 7 днів", "GR Provider: зустріч із інспектором (підготовка)", "GR Provider: контакти в МОЗ та навігація"],
+      "links": {"moz": "https://moz.gov.ua"}
     },
     {
       "id": "rescheduling-psychedelics",
       "name": "Перекласифікація MDMA/Psilocybin (Постанова №770)",
       "agency": "Міністерство охорони здоров'я",
       "category": "regulatory",
+      "keywords": ["психоделіки", "психоделики", "psychedelics", "MDMA", "psilocybin", "перекласифікація", "перекласификация", "rescheduling", "Постанова 770", "ПТСР", "ПТСД", "PTSD", "ветерани", "ветераны", "veterans"],
+      "commonQuestions": [
+        "Як зареєструвати психоделічну терапію?",
+        "Как зарегистрировать психоделическую терапию?",
+        "How to register psychedelic therapy?",
+        "Скільки часу займає перекласифікація?",
+        "Сколько времени занимает переклассификация?",
+        "How long does rescheduling take?"
+      ],
+      "shortDescription": "Процес перекласифікації MDMA та Psilocybin для клінічного використання у лікуванні ПТСР",
       "stages": [
-        {
-          "stage": 1,
-          "name": "Підготовка наукового обґрунтування",
-          "duration": "4-6 тижнів",
-          "status": "completed"
-        },
-        {
-          "stage": 2,
-          "name": "Зустрічі зі stakeholders (МОЗ, МВС)",
-          "duration": "2-4 тижні",
-          "status": "current"
-        },
-        {
-          "stage": 3,
-          "name": "Засідання комісії МОЗ",
-          "duration": "1-2 тижні",
-          "status": "pending"
-        },
-        {
-          "stage": 4,
-          "name": "Внесення змін в Постанову №770",
-          "duration": "2-4 тижні",
-          "status": "pending"
-        },
-        {
-          "stage": 5,
-          "name": "Внесення в реєстр дозволених речовин",
-          "duration": "1 тиждень",
-          "status": "pending"
-        }
+        {"stage": 1, "name": "Підготовка наукового обґрунтування", "duration": "4-6 тижнів", "status": "completed"},
+        {"stage": 2, "name": "Зустрічі зі stakeholders (МОЗ, МВС)", "duration": "2-4 тижні", "status": "current"},
+        {"stage": 3, "name": "Засідання комісії МОЗ", "duration": "1-2 тижні", "status": "pending"},
+        {"stage": 4, "name": "Внесення змін в Постанову №770", "duration": "2-4 тижні", "status": "pending"},
+        {"stage": 5, "name": "Внесення в реєстр дозволених речовин", "duration": "1 тиждень", "status": "pending"}
       ],
-      "totalDays": {
-        "min": 60,
-        "realistic": 90,
-        "max": 180
-      },
-      "responsible": {
-        "name": "Комісія з питань психоделіків",
-        "position": "МОЗ",
-        "email": "psychedelics@moz.gov.ua",
-        "phone": "+380 (44) 205-00-00"
-      },
-      "risks": [
-        "Політичне опір консервативних структур",
-        "Штучна затримка рішення (політична воля)",
-        "Тривале узгодження між відомствами",
-        "Міжнародні обмеження (ООН конвенції)"
-      ],
-      "accelerators": [
-        "GR Provider: підготовка наукового обґрунтування",
-        "GR Provider: навігація через МОЗ та МВС",
-        "GR Provider: координація stakeholders",
-        "GR Provider: моніторинг комісії та законопроектів"
-      ],
-      "links": {
-        "upra": "https://upra.org.ua",
-        "maps": "https://maps.org"
-      }
+      "totalDays": {"min": 60, "realistic": 90, "max": 180},
+      "responsible": {"name": "Комісія з питань психоделіків", "position": "МОЗ", "email": "psychedelics@moz.gov.ua", "phone": "+380 (44) 205-00-00"},
+      "risks": ["Політичне опір консервативних структур", "Штучна затримка рішення (політична воля)", "Тривале узгодження між відомствами", "Міжнародні обмеження (ООН конвенції)"],
+      "accelerators": ["GR Provider: підготовка наукового обґрунтування", "GR Provider: навігація через МОЗ та МВС", "GR Provider: координація stakeholders", "GR Provider: моніторинг комісії та законопроектів"],
+      "links": {"upra": "https://upra.org.ua", "maps": "https://maps.org"}
     }
   ]
 }
