@@ -1,0 +1,132 @@
+{
+  "documents": [
+    {
+      "id": "license-healthtech",
+      "name": "Лицензия HealthTech (МОЗ)",
+      "category": "regulatory",
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Подготовка документов",
+          "duration": "5-7 дней",
+          "status": "completed"
+        },
+        {
+          "stage": 2,
+          "name": "Подача в МОЗ",
+          "duration": "1 день",
+          "status": "completed"
+        },
+        {
+          "stage": 3,
+          "name": "Техническая проверка",
+          "duration": "5-7 дней",
+          "status": "current"
+        },
+        {
+          "stage": 4,
+          "name": "Принятие решения",
+          "duration": "7-10 дней",
+          "status": "pending"
+        },
+        {
+          "stage": 5,
+          "name": "Выдача лицензии",
+          "duration": "2-3 дня",
+          "status": "pending"
+        }
+      ],
+      "totalDays": {
+        "min": 20,
+        "realistic": 30,
+        "max": 45
+      },
+      "responsible": {
+        "name": "Відділ реєстрації МОЗ",
+        "position": "Контакти уточнюються по запиту",
+        "email": "licensing@moz.gov.ua",
+        "phone": "+380 (44) 205-00-00"
+      },
+      "risks": [
+        "Неполний пакет документів",
+        "Політична волокита (штучне замораживання документа)",
+        "Вимога додаткових документів",
+        "Конфлікт інтересів у комісії"
+      ],
+      "accelerators": [
+        "Перевірити пакет документів заранее",
+        "Запит про статус через 7 днів",
+        "Зустріч із інспектором перед перевіркою",
+        "Контакти в МОЗ (уточнювати по запиту)"
+      ],
+      "links": {
+        "moz": "https://moz.gov.ua"
+      }
+    },
+    {
+      "id": "rescheduling-psychedelics",
+      "name": "Рescheduling MDMA/Psilocybin (Постанова №770)",
+      "category": "regulatory",
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Підготовка наукового обґрунтування",
+          "duration": "4-6 тижнів",
+          "status": "completed"
+        },
+        {
+          "stage": 2,
+          "name": "Зустрічі зі stakeholders (МОЗ, МВС)",
+          "duration": "2-4 тижні",
+          "status": "current"
+        },
+        {
+          "stage": 3,
+          "name": "Засідання комісії МОЗ",
+          "duration": "1-2 тижні",
+          "status": "pending"
+        },
+        {
+          "stage": 4,
+          "name": "Внесення змін в Постанову №770",
+          "duration": "2-4 тижні",
+          "status": "pending"
+        },
+        {
+          "stage": 5,
+          "name": "Внесення в реєстр дозволених речовин",
+          "duration": "1 тиждень",
+          "status": "pending"
+        }
+      ],
+      "totalDays": {
+        "min": 60,
+        "realistic": 90,
+        "max": 180
+      },
+      "responsible": {
+        "name": "Комісія МОЗ з питань психоделіків",
+        "position": "Контакти уточнюються по запиту",
+        "email": "psychedelics@moz.gov.ua",
+        "phone": "+380 (44) 205-00-00"
+      },
+      "risks": [
+        "Політичне опір консервативних структур",
+        "Штучна затримка рішення (політична воля)",
+        "Тривале узгодження між відомствами",
+        "Міжнародні обмеження (ООН конвенції)"
+      ],
+      "accelerators": [
+        "Підтримка MAPS та міжнародних експертів",
+        "Дані з успішних trials (FDA, EMA)",
+        "Лобіювання через Lobby Club",
+        "Медіа кампанія про ПТСР у ветеранів",
+        "Контакти в МОЗ/МВС (уточнювати по запиту)"
+      ],
+      "links": {
+        "upra": "https://upra.org.ua",
+        "maps": "https://maps.org"
+      }
+    }
+  ]
+}

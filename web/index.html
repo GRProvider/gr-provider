@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR Provider | Навігація документів</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-top: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        .search-block {
+            background: rgba(255,255,255, 0.05);
+            border: 1px solid rgba(255,255,255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-block h2 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255,255,255, 0.1);
+            border: 1px solid rgba(255,255,255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        input[type="text"]::placeholder {
+            color: #888;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .quick-link {
+            padding: 12px 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .quick-link:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .document-card {
+            background: rgba(255,255,255, 0.05);
+            border: 1px solid rgba(255,255,255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .document-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .stages {
+            margin: 25px 0;
+        }
+
+        .stage {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255,255,255, 0.02);
+            border-radius: 8px;
+        }
+
+        .stage-number {
+            min-width: 40px;
+            height: 40px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .stage-content {
+            flex: 1;
+        }
+
+        .stage-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .stage-duration {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .stage-status {
+            margin-left: 15px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-current {
+            background: rgba(255, 193, 7, 0.3);
+            color: #ffc107;
+        }
+
+        .status-completed {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4caf50;
+        }
+
+        .status-pending {
+            background: rgba(156, 39, 176, 0.3);
+            color: #9c27f0;
+        }
+
+        .info-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255, 0.02);
+            border-left: 3px solid rgba(0, 212, 255, 0.5);
+            border-radius: 4px;
+        }
+
+        .info-section h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 6px 0;
+            color: #ddd;
+        }
+
+        .info-list li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .responsible {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .responsible-name {
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        .responsible-details {
+            font-size: 0.95em;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .total-time {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid #4caf50;
+        }
+
+        .time-item {
+            padding: 5px 0;
+            font-size: 1em;
+        }
+
+        .time-item strong {
+            color: #4caf50;
+        }
+
+        .cta-section {
+            background: rgba(255, 152, 0, 0.1);
+            border: 1px solid rgba(255, 152, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 15px;
+            color: #ff9800;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            padding: 15px 30px;
+            font-size: 1.1em;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 8px 16px rgba(255, 152, 0, 0.4);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #aaa;
+        }
+
+        .back-button {
+            background: rgba(255,255,255, 0.1);
+            color: #fff;
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .search-input-wrapper {
+                flex-direction: column;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>gr_provider</h1>
+            <p>де твій документ в гос органах?</p>
+        </header>
+
+        <div class="search-block" id="searchBlock">
+            <h2>🔍 Де зараз твій документ?</h2>
+            <div class="search-input-wrapper">
+                <input type="text" id="searchInput" placeholder="Вкажи назву документа...">
+                <button onclick="performSearch()">Пошук</button>
+            </div>
+            
+            <p style="color: #aaa; font-size: 0.9em; margin-top: 15px;">Або вибери готовий сценарій:</p>
+            <div class="quick-links" id="quickLinks"></div>
+        </div>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        let documentsData = [];
+
+        async function loadDocuments() {
+            try {
+                const response = await fetch('../../data/documents.json');
+                const data = await response.json();
+                documentsData = data.documents;
+                renderQuickLinks();
+            } catch (error) {
+                console.error('Error loading documents:', error);
+                // Fallback data if JSON fails
+                loadFallbackData();
+            }
+        }
+
+        function loadFallbackData() {
+            documentsData = [
+                {
+                    "id": "license-healthtech",
+                    "name": "Ліцензія HealthTech (МОЗ)",
+                    "category": "regulatory",
+                    "stages": [
+                        {"stage": 1, "name": "Підготовка документів", "duration": "5-7 днів", "status": "completed"},
+                        {"stage": 2, "name": "Подача в МОЗ", "duration": "1 день", "status": "completed"},
+                        {"stage": 3, "name": "Технічна перевірка", "duration": "5-7 днів", "status": "current"},
+                        {"stage": 4, "name": "Прийняття рішення", "duration": "7-10 днів", "status": "pending"},
+                        {"stage": 5, "name": "Видача ліцензії", "duration": "2-3 дні", "status": "pending"}
+                    ],
+                    "totalDays": {"min": 20, "realistic": 30, "max": 45},
+                    "responsible": {"name": "Відділ реєстрації МОЗ", "position": "Контакти уточнюються по запиту", "email": "licensing@moz.gov.ua", "phone": "+380 (44) 205-00-00"},
+                    "risks": ["Неповний пакет документів", "Політична волокита (штучне замораживання документа)", "Вимога додаткових документів", "Конфлікт інтересів у комісії"],
+                    "accelerators": ["Перевірити пакет документів заранее", "Запит про статус через 7 днів", "Зустріч із інспектором перед перевіркою", "Контакти в МОЗ (уточнювати по запиту)"],
+                    "links": {"moz": "https://moz.gov.ua"}
+                },
+                {
+                    "id": "rescheduling-psychedelics",
+                    "name": "Рescheduling MDMA/Psilocybin (Постанова №770)",
+                    "category": "regulatory",
+                    "stages": [
+                        {"stage": 1, "name": "Підготовка наукового обґрунтування", "duration": "4-6 тижнів", "status": "completed"},
+                        {"stage": 2, "name": "Зустрічі зі stakeholders (МОЗ, МВС)", "duration": "2-4 тижні", "status": "current"},
+                        {"stage": 3, "name": "Засідання комісії МОЗ", "duration": "1-2 тижні", "status": "pending"},
+                        {"stage": 4, "name": "Внесення змін в Постанову №770", "duration": "2-4 тижні", "status": "pending"},
+                        {"stage": 5, "name": "Внесення в реєстр дозволених речовин", "duration": "1 тиждень", "status": "pending"}
+                    ],
+                    "totalDays": {"min": 60, "realistic": 90, "max": 180},
+                    "responsible": {"name": "Комісія МОЗ з питань психоделіків", "position": "Контакти уточнюються по запиту", "email": "psychedelics@moz.gov.ua", "phone": "+380 (44) 205-00-00"},
+                    "risks": ["Політичне опір консервативних структур", "Штучна затримка рішення (політична воля)", "Тривале узгодження між відомствами", "Міжнародні обмеження (ООН конвенції)"],
+                    "accelerators": ["Підтримка MAPS та міжнародних експертів", "Дані з успішних trials (FDA, EMA)", "Лобіювання через Lobby Club", "Медіа кампанія про ПТСР у ветеранів", "Контакти в МОЗ/МВС (уточнювати по запиту)"],
+                    "links": {"upra": "https://upra.org.ua", "maps": "https://maps.org"}
+                }
+            ];
+            renderQuickLinks();
+        }
+
+        function renderQuickLinks() {
+            const quickLinksContainer = document.getElementById('quickLinks');
+            quickLinksContainer.innerHTML = '';
+            
+            documentsData.forEach(doc => {
+                const link = document.createElement('div');
+                link.className = 'quick-link';
+                link.textContent = doc.name;
+                link.onclick = () => displayDocument(doc);
+                quickLinksContainer.appendChild(link);
+            });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (!query) {
+                alert('Вкажи назву документа');
+                return;
+            }
+
+            const results = documentsData.filter(doc => 
+                doc.name.toLowerCase().includes(query) ||
+                doc.category.toLowerCase().includes(query)
+            );
+
+            if (results.length > 0) {
+                displayDocument(results[0]);
+            } else {
+                showNoResults();
+            }
+        }
+
+        function displayDocument(doc) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            let stagesHTML = doc.stages.map((stage, index) => `
+                <div class="stage">
+                    <div class="stage-number">${stage.stage}</div>
+                    <div class="stage-content">
+                        <div class="stage-name">${stage.name}</div>
+                        <div class="stage-duration">⏱️ ${stage.duration}</div>
+                    </div>
+                    <div class="stage-status status-${stage.status}">${
+                        stage.status === 'current' ? '📍 поточний' :
+                        stage.status === 'completed' ? '✅ виконано' : '⏳ очікує'
+                    }</div>
+                </div>
+            `).join('');
+
+            let risksHTML = doc.risks.map(risk => `<li>${risk}</li>`).join('');
+            let acceleratorsHTML = doc.accelerators.map(acc => `<li>${acc}</li>`).join('');
+
+            const html = `
+                <div class="document-card">
+                    <div class="document-title">${doc.name}</div>
+
+                    <div class="total-time">
+                        <div class="time-item">⏱️ <strong>Мінімум:</strong> ${doc.totalDays.min} днів</div>
+                        <div class="time-item">📊 <strong>Реалістично:</strong> ${doc.totalDays.realistic} днів</div>
+                        <div class="time-item">⚠️ <strong>Максимум:</strong> ${doc.totalDays.max} днів</div>
+                    </div>
+
+                    <h3 style="color: #00d4ff; margin-top: 20px; margin-bottom: 15px;">Маршрут документа</h3>
+                    <div class="stages">${stagesHTML}</div>
+
+                    <div class="responsible">
+                        <div class="responsible-name">👤 Контакт:</div>
+                        <div class="responsible-details"><strong>${doc.responsible.name}</strong></div>
+                        <div class="responsible-details">${doc.responsible.position}</div>
+                        <div class="responsible-details">📧 ${doc.responsible.email}</div>
+                        <div class="responsible-details">📞 ${doc.responsible.phone}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>⚠️ Типові ризики</h3>
+                        <ul class="info-list">${risksHTML}</ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>⚡ Як прискорити</h3>
+                        <ul class="info-list">${acceleratorsHTML}</ul>
+                    </div>
+
+                    <div class="cta-section">
+                        <h3>Потрібна допомога?</h3>
+                        <p style="margin-bottom: 15px; color: #ddd;">Напиши мені щоб обговорити твій конкретний випадок</p>
+                        <button class="cta-button" onclick="openConsultation()">Записатися</button>
+                    </div>
+
+                    <button class="back-button" onclick="goBack()">← Повернутися</button>
+                </div>
+            `;
+
+            resultsDiv.innerHTML = html;
+            resultsDiv.classList.add('active');
+            document.getElementById('searchBlock').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        function showNoResults() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="no-results">
+                    <h2>😕 Нічого не знайдено</h2>
+                    <p>Спробуй інший запит або вибери готовий сценарій</p>
+                </div>
+            `;
+            resultsDiv.classList.add('active');
+            document.getElementById('searchBlock').style.display = 'none';
+        }
+
+        function goBack() {
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('searchBlock').style.display = 'block';
+            document.getElementById('searchInput').value = '';
+            window.scrollTo(0, 0);
+        }
+
+        function openConsultation() {
+            window.location.href = 'https://t.me/gr_provider';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDocuments();
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+        });
+    </script>
+</body>
+</html>
